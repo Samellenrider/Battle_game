@@ -2,6 +2,7 @@ ENV["RACK_ENV"] = "test"
 require "capybara"
 require "capybara/rspec"
 require "rspec"
+require "sinatra"
 require_relative "../battleapp.rb"
 
 Capybara.app = Battle
