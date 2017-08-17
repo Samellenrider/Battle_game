@@ -1,8 +1,8 @@
-require ["RACK_ENV"] = "test"
+ENV["RACK_ENV"] = "test"
 require "capybara"
 require "capybara/rspec"
 require "rspec"
-require_relative "../app.rb"
+require_relative "../battleapp.rb"
 
 Capybara.app = Battle
 
