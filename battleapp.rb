@@ -4,21 +4,31 @@ require  'sinatra' #require sinatra equals the whole sinnatra code. we run sinat
 
 class Battle < Sinatra::Base #require class Base in Sinatra because we want to work with that
 
+  enable :sessions #hash gets initialized
+
   get '/' do #if we get the get request with / we do this code
 	  "Testing infrastructure working!"
     erb(:index) #we call index file / erb interprets html(index file syntax)(language)
   end
 
   post '/names' do
-    player_1_name = params[:player_1_name] || "human_1"
-    player_2_name = params[:player_2_name] || "human_2"
-    erb :names, :locals => {"player_1_name" => player_1_name, "player_2_name" => player_2_name} #different variable for the same value are called the same.
+    session[:player_1_name] = params[:player_1_name] #|| "human_1"
+    session[:player_2_name] = params[:player_2_name] #|| "human_2"
+    redirect to '/play' #post redirect loop
+  #erb :play#, :locals => {"player_1_name" => player_1_name, "player_2_name" => player_2_name} #different variable for the same value are called the same.
+  end
+
+  get '/play' do
+    @player_1_name = session[:player_1_name]
+    @player_2_name = session[:player_2_name]
+    erb :play
   end
 
 
 
 
 
+  run! if app_file == $0
 end
 
 
